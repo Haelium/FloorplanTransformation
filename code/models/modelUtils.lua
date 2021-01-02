@@ -26,11 +26,11 @@ function utils.linear2convTrunk(net,fSz)
     if torch.typename(x):find('Linear') then
       local nInp,nOut = x.weight:size(2)/(fSz*fSz),x.weight:size(1)
       local w = torch.reshape(x.weight,nOut,nInp,fSz,fSz)
-      local y = cudnn.SpatialConvolution(nInp,nOut,fSz,fSz,1,1)
+      local y = nn.SpatialConvolution(nInp,nOut,fSz,fSz,1,1)
       y.weight:copy(w); y.gradWeight:copy(w); y.bias:copy(x.bias)
       return y
     elseif torch.typename(x):find('Threshold') then
-      return cudnn.ReLU()
+      return nn.ReLU()
     elseif torch.typename(x):find('View') or
        torch.typename(x):find('SpatialZeroPadding') then
       return nn.Identity()
@@ -48,11 +48,11 @@ function utils.linear2convHead(net)
     if torch.typename(x):find('Linear') then
       local nInp,nOut = x.weight:size(2),x.weight:size(1)
       local w = torch.reshape(x.weight,nOut,nInp,1,1)
-      local y = cudnn.SpatialConvolution(nInp,nOut,1,1,1,1)
+      local y = nn.SpatialConvolution(nInp,nOut,1,1,1,1)
       y.weight:copy(w); y.gradWeight:copy(w); y.bias:copy(x.bias)
       return y
     elseif torch.typename(x):find('Threshold') then
-      return cudnn.ReLU()
+      return nn.ReLU()
     elseif not torch.typename(x):find('View') and
       not torch.typename(x):find('Copy') then
       return x
@@ -76,7 +76,7 @@ function utils.updatePadding(net, nn_padding)
     end
   else
     if torch.typename(net) == "nn.SpatialConvolution" or
-      torch.typename(net) == "cudnn.SpatialConvolution" then
+      torch.typename(net) == "nn.SpatialConvolution" then
       if (net.kW == 3 and net.kH == 3) or (net.kW==7 and net.kH==7) then
         local pw, ph = net.padW, net.padH
         net.padW, net.padH = 0, 0

@@ -6,7 +6,7 @@ require 'inn'
 require 'image'
 require 'xlua'
 
-require 'cudnn'
+require 'nn'
 require 'loadcaffe'
 local gp = require 'gpath'
 
@@ -140,14 +140,14 @@ end
 -----------------------------------------------------------------------------
 --
 function nn_utils.loadLeNet(net)
-  net = net or 'cudnn' 
+  net = net or 'nn' 
   local modelPath = paths.concat(gp.caffe_model, 'lenet')
   return loadcaffe.load(paths.concat(modelPath, 'lenet.prototxt'), 
     paths.concat(modelPath, 'lenet_iter_10000.caffemodel'), net)
 end
 
 function nn_utils.loadAlexNet(net)
-  net = net or 'cudnn' 
+  net = net or 'nn' 
   local modelPath = paths.concat(gp.caffe_model, 'bvlc_alexnet')
   return loadcaffe.load(paths.concat(modelPath, 'deploy.prototxt'), 
     paths.concat(modelPath, 'bvlc_alexnet.caffemodel'), net)
@@ -156,7 +156,7 @@ end
 -- not working
 function nn_utils.loadPlacesAlexNet(net)
   print('Warning: loadFasterRCNNZF is not working')
-  local net = net or 'cudnn' 
+  local net = net or 'nn' 
   local modelPath = paths.concat(gp.caffe_model, 'places205_alexnet')
   return loadcaffe.load(paths.concat(modelPath, 'places205CNN_deploy_torch.prototxt'), 
     paths.concat(modelPath, 'places205CNN_iter_300000.caffemodel'), net)
@@ -165,28 +165,28 @@ end
 -- not working
 function nn_utils.loadHybridAlexNet(net)
   print('Warning: loadFasterRCNNZF is not working')
-  local net = net or 'cudnn' 
+  local net = net or 'nn' 
   local modelPath = paths.concat(gp.caffe_model, 'hybrid_alexnet')
   return loadcaffe.load(paths.concat(modelPath, 'hybridCNN_deploy.prototxt'), 
     paths.concat(modelPath, 'hybridCNN_iter_700000.caffemodel'), net)
 end
 
 function nn_utils.loadCaffeNet(net)
-  local net = net or 'cudnn' 
+  local net = net or 'nn' 
   local modelPath = paths.concat(gp.caffe_model, 'bvlc_reference_caffenet')
   return loadcaffe.load(paths.concat(modelPath, 'deploy.prototxt'), 
     paths.concat(modelPath, 'bvlc_reference_caffenet.caffemodel'), net)
 end
 
 function nn_utils.loadVGG16(net)
-  local net = net or 'cudnn' 
+  local net = net or 'nn' 
   local modelPath = paths.concat(gp.caffe_model, 'vgg_16')
   return loadcaffe.load(paths.concat(modelPath, 'VGG_ILSVRC_16_layers_deploy.prototxt'), 
     paths.concat(modelPath, 'VGG_ILSVRC_16_layers.caffemodel'), net)
 end
 
 function nn_utils.loadVGG19(net)
-  local net = net or 'cudnn' 
+  local net = net or 'nn' 
   local modelPath = paths.concat(gp.caffe_model, 'vgg_19')
   return loadcaffe.load(paths.concat(modelPath, 'VGG_ILSVRC_19_layers_deploy.prototxt'), 
     paths.concat(modelPath, 'VGG_ILSVRC_19_layers.caffemodel'), net)
@@ -228,7 +228,7 @@ function nn_utils.loadResNet200()
 end
 
 function nn_utils.loadRCNN(net)
-  local net = net or 'cudnn' 
+  local net = net or 'nn' 
   local modelPath = paths.concat(gp.caffe_model, 'bvlc_reference_rcnn_ilsvrc13')
   return loadcaffe.load(paths.concat(modelPath, 'deploy.prototxt'), 
     paths.concat(modelPath, 'bvlc_reference_rcnn_ilsvrc13.caffemodel'), net)
@@ -250,14 +250,14 @@ function nn_utils.loadFCN32s(net)
 end
 
 function nn_utils.loadFCN32sRaw(net)
-  local net = net or 'cudnn' 
+  local net = net or 'nn' 
   local modelPath = paths.concat(gp.caffe_model, 'fcn_32s_pascal')
   return loadcaffe.load(paths.concat(modelPath, 'fcn-32s-pascal-deploy.prototxt'), 
     paths.concat(modelPath, 'fcn-32s-pascal.caffemodel'), net)
 end
 
 function nn_utils.loadNIN(net)
-  local net = net or 'cudnn' 
+  local net = net or 'nn' 
   local modelPath = paths.concat(gp.caffe_model, 'nin')
   return loadcaffe.load(paths.concat(modelPath, 'train_val.prototxt'), 
     paths.concat(modelPath, 'nin_imagenet_conv.caffemodel'), net)
@@ -266,7 +266,7 @@ end
 -- not working
 function nn_utils.loadFasterRCNNZF(net)
   print('Warning: loadFasterRCNNZF is not working')
-  local net = net or 'cudnn' 
+  local net = net or 'nn' 
   local modelPath = paths.concat(gp.caffe_model, 'faster_rcnn_VOC0712_ZF')
   return loadcaffe.load(paths.concat(modelPath, 'deploy.prototxt'), 
     paths.concat(modelPath, 'ZF_faster_rcnn_final.caffemodel'), net)
@@ -275,7 +275,7 @@ end
 -- not working
 function nn_utils.loadFasterRCNNVGG(net)
   print('Warning: loadFasterRCNNVGG is not working')
-  local net = net or 'cudnn' 
+  local net = net or 'nn' 
   local modelPath = paths.concat(gp.caffe_model, 'faster_rcnn_VOC0712_vgg_16layers')
   return loadcaffe.load(paths.concat(modelPath, 'deploy.prototxt'), 
     paths.concat(modelPath, 'VGG16_faster_rcnn_final.caffemodel'), net)
@@ -284,7 +284,7 @@ end
 -- not working
 function nn_utils.loadHED(net)
   print('Warning: loadHED is not working')
-  local net = net or 'cudnn' 
+  local net = net or 'nn' 
   local modelPath = paths.concat(gp.caffe_model, 'hed')
   return loadcaffe.load(paths.concat(modelPath, 'hed.prototxt'), 
     paths.concat(modelPath, 'hed_bsds.caffemodel'), net)
@@ -602,7 +602,7 @@ local function ConvInit(model, name)
    for k, v in pairs(model:findModules(name)) do
       local n = v.kW * v.kH * v.nOutputPlane
       v.weight:normal(0, math.sqrt(2 / n))
-      if cudnn.version >= 4000 then
+      if nn.version >= 4000 then
          v.bias = nil
          v.gradBias = nil
       else
@@ -619,21 +619,21 @@ local function BNInit(model, name)
 end
 
 function nn_utils.init(model, opt)
-   ConvInit(model, 'cudnn.SpatialConvolution')
+   ConvInit(model, 'nn.SpatialConvolution')
    ConvInit(model, 'nn.SpatialConvolution')
    BNInit(model, 'fbnn.SpatialBatchNormalization')
-   BNInit(model, 'cudnn.SpatialBatchNormalization')
+   BNInit(model, 'nn.SpatialBatchNormalization')
    BNInit(model, 'nn.SpatialBatchNormalization')
    for k, v in pairs(model:findModules('nn.Linear')) do
       v.bias:zero()
    end
 end
 
-function nn_utils.cudnnize(model, opt)
+function nn_utils.nnize(model, opt)
    model:cuda()
-   cudnn.convert(model, cudnn)
+   nn.convert(model, nn)
 
-   if opt.cudnn == 'deterministic' then
+   if opt.nn == 'deterministic' then
       model:apply(function(m)
             if m.setMode then m:setMode(1,1,1) end
       end)

@@ -1,5 +1,5 @@
 require 'nn'
-require 'cudnn'
+require 'nn'
 require 'cunn'
 
 package.path = '../util/lua/?.lua;' .. package.path

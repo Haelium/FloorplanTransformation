@@ -1,7 +1,7 @@
 require 'torch'
 require 'nn'
 require 'cunn'
-require 'cudnn'
+require 'nn'
 require 'fbnn'
 require 'fbcunn'
 require 'fbcode.deeplearning.experimental.yuandong.layers.custom_layers'
@@ -15,10 +15,10 @@ local cjson = require 'cjson'
 
 local conv_layer, relu_layer, maxpool_layer
 
-if cudnn then
-    conv_layer = cudnn.SpatialConvolution
-    relu_layer = cudnn.ReLU
-    maxpool_layer = cudnn.SpatialMaxPooling
+if nn then
+    conv_layer = nn.SpatialConvolution
+    relu_layer = nn.ReLU
+    maxpool_layer = nn.SpatialMaxPooling
 else 
     conv_layer = nn.SpatialConvolutionMM
     relu_layer = nn.ReLU
@@ -466,7 +466,7 @@ function nnutils.reload_if(config, model_name, config_name)
        require 'nn'
        require 'cutorch'
        require 'cunn'
-       require 'cudnn'
+       require 'nn'
        print(string.format('| reloading experiment %s', config.reload))
        local f = torch.DiskFile(string.format('%s/%s', config.reload, model_name))
        f:binary()
@@ -555,7 +555,7 @@ function nnutils.get_config(default_config)
      require 'nn'
      require 'cutorch'
      require 'cunn'
-     require 'cudnn'
+     require 'nn'
      print(string.format('| reloading experiment %s', config.reload))
      if pl.path.isdir(config.reload) then
         loadfilename = string.format('%s/model.bin', config.reload)
@@ -869,7 +869,7 @@ local function merge_layer(bn, linear)
    if bn == nil or linear == nil then return end
 
    local bn_matched = (torch.type(bn) == "nn.SpatialBatchNormalization" or torch.type(bn) == "nn.BatchNormalization")
-   local linear_matched = (torch.type(linear) == "cudnn.SpatialConvolution" or torch.type(linear) == "nn.Linear")
+   local linear_matched = (torch.type(linear) == "nn.SpatialConvolution" or torch.type(linear) == "nn.Linear")
 
    assert(not bn_matched or linear_matched, "Find BatchNormalization layer but linear layer is missing!")
    if (not bn_matched) or (not linear_matched) then return end

@@ -1,6 +1,6 @@
 local nn = require 'nn'
 require 'cunn'
-require 'cudnn'
+require 'nn'
 
 local function createCriterion(opt)
    local criterion = nn.ParallelCriterion()

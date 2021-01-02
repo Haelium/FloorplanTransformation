@@ -1,7 +1,7 @@
 -- Load all common packages.
 require 'nn'
 require 'cunn'
-require 'cudnn'
+require 'nn'
 require 'fbnn'
 require 'fbcunn'
 

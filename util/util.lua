@@ -187,15 +187,15 @@ end
 
 -- TO DO: loading code is rather hacky; clean it up and make sure it works on all types of nets / cpu/gpu configurations
 function util.load(filename, opt)
-	if opt.cudnn>0 then
-		require 'cudnn'
+	if opt.nn>0 then
+		require 'nn'
 	end
 	local net = torch.load(filename)
 	if opt.gpu > 0 then
 		require 'cunn'
 		net:cuda()
 		
-		-- calling cuda on cudnn saved nngraphs doesn't change all variables to cuda, so do it below
+		-- calling cuda on nn saved nngraphs doesn't change all variables to cuda, so do it below
 		if net.forwardnodes then
 			for i=1,#net.forwardnodes do
 				if net.forwardnodes[i].data.module then
@@ -213,10 +213,10 @@ function util.load(filename, opt)
 	return net
 end
 
-function util.cudnn(net)
-	require 'cudnn'
-	require 'util/cudnn_convert_custom'
-	return cudnn_convert_custom(net, cudnn)
+function util.nn(net)
+	require 'nn'
+	require 'util/nn_convert_custom'
+	return nn_convert_custom(net, nn)
 end
 
 return util

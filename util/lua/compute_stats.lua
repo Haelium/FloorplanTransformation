@@ -25,7 +25,7 @@ local function get_layer(model, layer_names)
 end
 
 function stats.get_relus(model)
-    local layer_names = { ["nn.ReLU"] = true, ["cudnn.ReLU"] = true }
+    local layer_names = { ["nn.ReLU"] = true, ["nn.ReLU"] = true }
     return get_layer(model, layer_names)
 end
 

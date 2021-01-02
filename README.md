@@ -28,7 +28,7 @@ This code implements the algorithm described in our paper in Torch7.
 ### Torch packages
 - [nn](https://github.com/torch/nn)
 - [cunn](https://github.com/torch/cunn)
-- [cudnn](https://github.com/soumith/cudnn.torch)
+- [nn](https://github.com/soumith/nn.torch)
 - [image](https://github.com/torch/image)
 - [ffi](http://luajit.org/ext_ffi.html)
 - [csvigo](https://github.com/clementfarabet/lua---csv)

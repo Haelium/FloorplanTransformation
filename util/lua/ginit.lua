@@ -7,8 +7,8 @@ function ginit(opt)
 
   --require 'cutorch'
   --require 'cunn'
-  require 'cudnn'
-  cudnn.benchmark = true
+  require 'nn'
+  nn.benchmark = true
 
   -- require 'optim'
   -- require 'gnuplot'
