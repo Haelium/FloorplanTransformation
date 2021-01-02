@@ -1,6 +1,6 @@
 require 'nn'
 --require 'cunn'
-require 'cudnn'
+--require 'cudnn'
 --require 'dpnn'
 --require 'nnx'
 --local inn = require 'inn'
@@ -29,7 +29,7 @@ function M.setup(opt, checkpoint)
       model = require(modelFileName)(opt)
    end
    
-   cudnn.convert(model, cudnn)
+   --cudnn.convert(model, cudnn)
 
    
    local criterionFileName = 'models/' .. opt.criterionType

@@ -23,8 +23,8 @@ function utils.toNNSingleTensor(a)
 
   if opt.type == 'CPU' then 
     return a:double()
-  elseif opt.type == 'CUDA' then 
-    return a:cuda()
+--  elseif opt.type == 'CUDA' then 
+--    return a:cuda()
   else
     return a
   end
