@@ -1,6 +1,4 @@
 require 'nn'
-require 'cudnn'
-require 'cunn'
 image = require 'image'
 
 package.path = '../util/lua/?.lua;' .. package.path
@@ -20,7 +18,6 @@ local segmentationBranch_1 = nn.Sequential():add(nn.SoftMax()):add(nn.View(-1, o
 local segmentationBranch_2 = nn.Sequential():add(nn.SoftMax()):add(nn.View(-1, opt.sampleDim, opt.sampleDim, 17)):add(nn.Transpose({3, 4}, {2, 3}))
 modelHeatmap:add(nn.ParallelTable():add(heatmapBranch):add(segmentationBranch_1):add(segmentationBranch_2))
 modelHeatmap:add(nn.JoinTable(1, 3))
-modelHeatmap:cuda()
 modelHeatmap:evaluate()
 
 
